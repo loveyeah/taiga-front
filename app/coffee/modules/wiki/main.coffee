@@ -259,7 +259,6 @@ $qqueue, $repo, $analytics, wikiHistoryService) ->
 
         $scope.$watch 'project', (project) ->
             return if !project
-
             $scope.editableDescription = project.my_permissions.indexOf("modify_wiki_page") != -1
 
     return {

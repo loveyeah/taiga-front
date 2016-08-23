@@ -9,7 +9,6 @@
 ### Misc
 - Lots of small and not so small bugfixes.
 
-
 ## 3.0.0 Stellaria Borealis (2016-10-02)
 
 ### Features
