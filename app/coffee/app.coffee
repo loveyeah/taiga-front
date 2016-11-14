@@ -130,11 +130,11 @@ configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEven
     # Project
     $routeProvider.when("/project/new",
         {
-            title: "PROJECT.NAVIGATION.DISCOVER",
+            title: "PROJECT.CREATE.TITLE",
             templateUrl: "projects/create/create-project.html",
-            loader: true
-            # controller: "Project",
-            # controllerAs: "vm"
+            loader: true,
+            controller: "CreateProjectCtrl",
+            controllerAs: "vm"
         }
     )
 
