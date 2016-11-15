@@ -1,0 +1,106 @@
+.create-project
+    h1.create-project-title(translate="PROJECT.DUPLICATE.TITLE")
+    h3.create-project-description(translate="PROJECT.DUPLICATE.DESCRIPTION")
+    form.duplicate-project
+        fieldset.duplicate-project-reference
+            select(
+                ng-model="vm.duplicatedProject.project"
+                ng-change="vm.getReferenceProject(vm.duplicatedProject.project)"
+                data-required="true"
+                ng-options="p.slug as p.name for p in vm.projects | toMutable"
+                id="project-selector-dropdown"
+                autofocus
+            )
+                option(
+                    value="" 
+                    disabled 
+                    selected
+                    translate="PROJECT.DUPLICATE.SELECT_PLACEHOLDER"
+                )
+        fieldset.duplicate-project-title
+            label(
+                translate="PROJECT.DUPLICATE.DETAILS"
+                for="project-name"
+            )
+            input(
+                type="text"
+                ng-model="vm.duplicatedProject.name"
+                placeholder="{{'PROJECT.DUPLICATE.PROJECT_TITLE' | translate}}"
+                name="project-name"
+                data-required="true"
+            )
+        fieldset.duplicate-project-description
+            textarea(
+                ng-model="vm.duplicatedProject.description"
+                placeholder="{{'PROJECT.DUPLICATE.PROJECT_DESCRIPTION' | translate}}"
+                data-required="true"
+            ) 
+        .duplicate-project-privacity(role="group")
+            fieldset
+                input(
+                    type="radio"
+                    name="is_private"
+                    id="template-public"
+                    data-required="true"
+                    aria-hidden="true"
+                    ng-value="false"
+                    ng-model="vm.duplicatedProject.privacity"
+                    required
+                    ng-disabled="!vm.canCreatePublicProjects"
+                    ng-checked="vm.canCreatePublicProjects"
+                )
+                label.duplicate-project-privacity-label(for="template-public")
+                    tg-svg(svg-icon="icon-discover")
+                    span(translate="PROJECT.CREATE.PUBLIC_PROJECT")
+            fieldset
+                input(
+                    type="radio"
+                    name="is_private"
+                    id="template-private"
+                    data-required="true"
+                    ng-value="true"
+                    ng-model="vm.duplicatedProject.privacity"
+                    aria-hidden="true"
+                    required
+                    ng-disabled="!vm.canCreatePrivateProjects"
+                    ng-checked="!vm.canCreatePublicProjects"
+                )
+                label.duplicate-project-privacity-label(for="template-private")
+                    tg-svg(svg-icon="icon-lock")
+                    span(translate="PROJECT.CREATE.PRIVATE_PROJECT")
+                    
+        fieldset.create-project-invite(ng-if="vm.referenceProject.get('members')")
+            label
+                span(translate="PROJECT.CREATE.INVITE")
+                span.mumble(translate="PROJECT.CREATE.INVITE_LATER")
+            .create-project-invite-avatars
+                .create-project-invite-avatar(tg-repeat="avatar in vm.referenceProject.get('members')")
+                    label(ng-click="vm.toggleMemberInvite(avatar.get('id'))")
+                        input(
+                            type="checkbox"
+                            id="avatar-{{avatar.get('id')}}"
+                            value="{{avatar.get('id')}}"
+                            checked="checked"
+                            aria-hidden="true"
+                        )
+                        img(
+                            tg-avatar="avatar"
+                            alt="{{avatar.get('full_name_display')}}"
+                            title="{{avatar.get('full_name_display')}}"
+                        )
+        fieldset.create-project-action
+            button.create-project-action-cancel(
+                type="button"
+                ng-click="vm.onCancelProjectDuplication()"
+                title="{{'PROJECT.CREATE.BACK' | translate}}"
+                translate="PROJECT.CREATE.BACK"
+            )
+            button.create-project-action-duplicate(
+                type="submit"
+                ng-click="vm.onDuplicateProject()"
+                title="{{'PROJECT.CREATE.TITLE' | translate}}"
+                ng-disabled="!vm.duplicatedProject.name && !vm.referenceProject || vm.loading"
+                tg-loading="vm.loading"
+                translate="PROJECT.CREATE.TITLE"
+            )
+                

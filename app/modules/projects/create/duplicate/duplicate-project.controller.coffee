@@ -17,17 +17,21 @@
 # File: project.controller.coffee
 ###
 
-class CreateProjectController
-    @.$inject = []
+class DuplicateProjectController
+    @.$inject = [
+        "tgCurrentUserService",
+        "tgProjectsService"
+    ]
 
-    constructor: () ->
-        @.inDefaultStep = true
+    constructor: (@currentUserService, @projectsService) ->
+        @.projects = @currentUserService.projects.get("all")
+        @.canCreatePublicProjects = @currentUserService.canCreatePublicProjects()
+        @.canCreatePrivateProjects = @currentUserService.canCreatePrivateProjects()
 
-    getStep: (step) ->
-        console.log step
-        if step = 'duplicate'
-            @.inDefaultStep = false
-            @.inStepDuplicateProject = true
+    getReferenceProject: (project) ->
+        @projectsService.getProjectBySlug(project).then (project) =>
+            @.referenceProject = project
+            console.log @.referenceProject.toJS()
 
 
-angular.module("taigaProjects").controller("CreateProjectCtrl", CreateProjectController)
+angular.module("taigaProjects").controller("DuplicateProjectCtrl", DuplicateProjectController)

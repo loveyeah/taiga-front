@@ -14,20 +14,22 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
-# File: project.controller.coffee
+# File: duplicate-project.directive.coffee
 ###
 
-class CreateProjectController
-    @.$inject = []
+DuplicateProjectDirective = () ->
 
-    constructor: () ->
-        @.inDefaultStep = true
+    link = (scope, el, attr, ctrl) ->
 
-    getStep: (step) ->
-        console.log step
-        if step = 'duplicate'
-            @.inDefaultStep = false
-            @.inStepDuplicateProject = true
+    return {
+        link: link,
+        templateUrl:"projects/create/duplicate/duplicate-project.html",
+        controller: "DuplicateProjectCtrl",
+        controllerAs: "vm",
+        bindToController: true,
+        scope: {}
+    }
 
+DuplicateProjectDirective.$inject = []
 
-angular.module("taigaProjects").controller("CreateProjectCtrl", CreateProjectController)
+angular.module("taigaProjects").directive("tgDuplicateProject", DuplicateProjectDirective)

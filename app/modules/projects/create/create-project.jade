@@ -1,4 +1,4 @@
-.create-project
+.create-project(ng-if="vm.inDefaultStep")
     .create-project-wrapper
         h1.create-project-title(translate="PROJECT.CREATE.TITLE")
         h3.create-project-description(translate="PROJECT.CREATE.CHOOSE_TEMPLATE")
@@ -39,7 +39,7 @@
                         )
                     .create-project-selector-long-description(ng-show="vm.displayKanbanDesc")
                         p(translate="PROJECT.CREATE.TEMPLATE_KANBAN_LONGDESC")
-            li
+            li(ng-click="vm.getStep('duplicate')")
                 .create-project-selector-icon
                     tg-svg(svg-icon="icon-duplicate")
                 .create-project-selector-template-wrapper
@@ -61,3 +61,5 @@
                         translate="PROJECT.CREATE.IMPORT"
                     )
                     p.create-project-selector-description(translate="PROJECT.CREATE.IMPORT_DESC")
+
+tg-duplicate-project(ng-if="vm.inStepDuplicateProject")

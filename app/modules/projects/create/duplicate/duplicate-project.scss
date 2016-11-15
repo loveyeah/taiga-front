@@ -1,0 +1,27 @@
+.duplicate-project {
+    fieldset {
+        margin-bottom: 1rem;
+    }
+    label {
+        @include font-type(bold);
+        @include font-size(small);
+        display: block;
+        margin-bottom: .25rem;
+        .mumble {
+            @include font-type(light);
+            margin-left: .25rem;
+        }
+    }
+    &-reference {
+        margin-bottom: 2rem;
+    }
+    &-privacity {
+        @include btn-group;
+        input {
+            display: none;
+        }
+        label {
+            background: $mass-white;
+        }
+    }
+}
