@@ -69,25 +69,10 @@
                     tg-svg(svg-icon="icon-lock")
                     span(translate="PROJECT.CREATE.PRIVATE_PROJECT")
                     
-        fieldset.create-project-invite(ng-if="vm.referenceProject.get('members')")
-            label
-                span(translate="PROJECT.CREATE.INVITE")
-                span.mumble(translate="PROJECT.CREATE.INVITE_LATER")
-            .create-project-invite-avatars
-                .create-project-invite-avatar(tg-repeat="avatar in vm.referenceProject.get('members')")
-                    label(ng-click="vm.toggleMemberInvite(avatar.get('id'))")
-                        input(
-                            type="checkbox"
-                            id="avatar-{{avatar.get('id')}}"
-                            value="{{avatar.get('id')}}"
-                            checked="checked"
-                            aria-hidden="true"
-                        )
-                        img(
-                            tg-avatar="avatar"
-                            alt="{{avatar.get('full_name_display')}}"
-                            title="{{avatar.get('full_name_display')}}"
-                        )
+        tg-invite-members(
+            ng-if="vm.referenceProject.get('members')"
+            members="vm.referenceProject.get('members')"
+        )
         fieldset.create-project-action
             button.create-project-action-cancel(
                 type="button"

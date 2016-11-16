@@ -1,0 +1,13 @@
+.create-project-invite-avatar {
+    cursor: pointer;
+    margin-left: .25rem;
+    &:first-child {
+        margin: 0;
+    }
+    input {
+        display: none;
+    }
+    img {
+        width: 3rem;
+    }
+}

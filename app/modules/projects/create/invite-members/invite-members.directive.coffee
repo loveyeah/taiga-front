@@ -14,23 +14,24 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
-# File: project.controller.coffee
+# File: invite-members.directive.coffee
 ###
 
-class DuplicateProjectController
-    @.$inject = [
-        "tgCurrentUserService",
-        "tgProjectsService"
-    ]
+InviteMembersDirective = () ->
 
-    constructor: (@currentUserService, @projectsService) ->
-        @.projects = @currentUserService.projects.get("all")
-        @.canCreatePublicProjects = @currentUserService.canCreatePublicProjects()
-        @.canCreatePrivateProjects = @currentUserService.canCreatePrivateProjects()
+    link = (scope, el, attr, ctrl) ->
 
-    getReferenceProject: (project) ->
-        @projectsService.getProjectBySlug(project).then (project) =>
-            @.referenceProject = project
+    return {
+        link: link,
+        templateUrl:"projects/create/invite-members/invite-members.html",
+        controller: "InviteMembersCtrl",
+        controllerAs: "vm",
+        bindToController: true,
+        scope: {
+            members: '='
+        }
+    }
 
+InviteMembersDirective.$inject = []
 
-angular.module("taigaProjects").controller("DuplicateProjectCtrl", DuplicateProjectController)
+angular.module("taigaProjects").directive("tgInviteMembers", InviteMembersDirective)

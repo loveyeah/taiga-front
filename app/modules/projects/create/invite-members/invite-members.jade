@@ -1,0 +1,10 @@
+fieldset.create-project-invite
+    label
+        span(translate="PROJECT.CREATE.INVITE")
+        span.mumble(translate="PROJECT.CREATE.INVITE_LATER")
+    .create-project-invite-avatars
+        .create-project-invite-avatar(tg-repeat="member in vm.members")
+            tg-single-member(
+                avatar="member"
+            )
+            

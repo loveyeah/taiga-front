@@ -1,0 +1,13 @@
+label(ng-click="vm.toggleMemberInvite(avatar.get('id'))")
+    input(
+        type="checkbox"
+        id="avatar-{{vm.avatar.get('id')}}"
+        value="{{vm.avatar.get('id')}}"
+        checked="checked"
+        aria-hidden="true"
+    )
+    img(
+        tg-avatar="vm.avatar"
+        alt="{{vm.avatar.get('full_name_display')}}"
+        title="{{vm.avatar.get('full_name_display')}}"
+    )

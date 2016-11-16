@@ -77,22 +77,3 @@ $create-project-padding: 1.25rem;
         margin-bottom: 0;
     }
 }
-
-.create-project-invite {
-    &-avatars {
-        display: flex;
-    }
-    &-avatar {
-        cursor: pointer;
-        margin-left: .25rem;
-        &:first-child {
-            margin: 0;
-        }
-        input {
-            display: none;
-        }
-        img {
-            width: 3rem;
-        }
-    }
-}

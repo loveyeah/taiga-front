@@ -24,7 +24,6 @@ class CreateProjectController
         @.inDefaultStep = true
 
     getStep: (step) ->
-        console.log step
         if step = 'duplicate'
             @.inDefaultStep = false
             @.inStepDuplicateProject = true
