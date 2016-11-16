@@ -24,7 +24,10 @@ class CreateProjectController
         @.inDefaultStep = true
 
     getStep: (step) ->
-        if step = 'duplicate'
+        if step == 'home'
+            @.inDefaultStep = true
+            @.inStepDuplicateProject = false
+        else if step == 'duplicate'
             @.inDefaultStep = false
             @.inStepDuplicateProject = true
 

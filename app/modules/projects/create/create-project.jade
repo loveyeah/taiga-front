@@ -62,4 +62,7 @@
                     )
                     p.create-project-selector-description(translate="PROJECT.CREATE.IMPORT_DESC")
 
-tg-duplicate-project(ng-if="vm.inStepDuplicateProject")
+tg-duplicate-project(
+    ng-if="vm.inStepDuplicateProject"
+    on-cancel-project-duplication="vm.getStep('home')"
+)

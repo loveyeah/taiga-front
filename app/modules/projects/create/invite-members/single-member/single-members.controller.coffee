@@ -21,7 +21,9 @@ class SingleMemberController
     @.$inject = []
 
     constructor: () ->
-        console.log @.avatar
+        @.isUserDisabled = false
 
+    toggleUserInvite: () ->
+        @.isUserDisabled = !@.isUserDisabled
 
 angular.module("taigaProjects").controller("SingleMemberCtrl", SingleMemberController)

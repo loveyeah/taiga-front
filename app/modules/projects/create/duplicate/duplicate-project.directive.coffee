@@ -27,7 +27,9 @@ DuplicateProjectDirective = () ->
         controller: "DuplicateProjectCtrl",
         controllerAs: "vm",
         bindToController: true,
-        scope: {}
+        scope: {
+            onCancelProjectDuplication: '&'
+        }
     }
 
 DuplicateProjectDirective.$inject = []

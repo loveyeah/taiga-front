@@ -1,4 +1,6 @@
-label(ng-click="vm.toggleMemberInvite(avatar.get('id'))")
+label.create-project-invite-avatar(
+    ng-class="{'disabled': vm.isUserDisabled}"
+)
     input(
         type="checkbox"
         id="avatar-{{vm.avatar.get('id')}}"
@@ -10,4 +12,5 @@ label(ng-click="vm.toggleMemberInvite(avatar.get('id'))")
         tg-avatar="vm.avatar"
         alt="{{vm.avatar.get('full_name_display')}}"
         title="{{vm.avatar.get('full_name_display')}}"
+        ng-click="vm.toggleUserInvite()"
     )
