@@ -28,12 +28,14 @@
                 placeholder="{{'PROJECT.DUPLICATE.PROJECT_TITLE' | translate}}"
                 name="project-name"
                 data-required="true"
+                required
             )
         fieldset.duplicate-project-description
             textarea(
                 ng-model="vm.duplicatedProject.description"
                 placeholder="{{'PROJECT.DUPLICATE.PROJECT_DESCRIPTION' | translate}}"
                 data-required="true"
+                required
             ) 
         .duplicate-project-privacity(role="group")
             fieldset
@@ -44,7 +46,7 @@
                     data-required="true"
                     aria-hidden="true"
                     ng-value="false"
-                    ng-model="vm.duplicatedProject.privacity"
+                    ng-model="vm.duplicatedProject.is_private"
                     required
                     ng-disabled="!vm.canCreatePublicProjects"
                     ng-checked="vm.canCreatePublicProjects"
@@ -59,7 +61,7 @@
                     id="template-private"
                     data-required="true"
                     ng-value="true"
-                    ng-model="vm.duplicatedProject.privacity"
+                    ng-model="vm.duplicatedProject.is_private"
                     aria-hidden="true"
                     required
                     ng-disabled="!vm.canCreatePrivateProjects"
@@ -72,6 +74,7 @@
         tg-invite-members(
             ng-if="vm.referenceProject.get('members')"
             members="vm.referenceProject.get('members')"
+            on-set-invited-members="vm.setInvitedMembers(members)"
         )
         fieldset.create-project-action
             button.create-project-action-cancel(

@@ -6,5 +6,6 @@ fieldset.create-project-invite
         tg-single-member(
             avatar="member"
             tg-repeat="member in vm.members"
+            ng-click="vm.toggleInviteMember(member)"
         )
             

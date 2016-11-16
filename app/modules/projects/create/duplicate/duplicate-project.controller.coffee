@@ -32,5 +32,12 @@ class DuplicateProjectController
         @projectsService.getProjectBySlug(project).then (project) =>
             @.referenceProject = project
 
+    setInvitedMembers: (members) ->
+        console.log members
+        @.duplicatedProject.users = members
+        console.log @.duplicatedProject
+
+    onDuplicateProject: () ->
+        console.log @.duplicatedProject
 
 angular.module("taigaProjects").controller("DuplicateProjectCtrl", DuplicateProjectController)

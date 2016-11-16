@@ -21,7 +21,20 @@ class InviteMembersController
     @.$inject = []
 
     constructor: () ->
-        console.log @.members
+        @.invitedMembers = []
+        @.membersList = []
+        @.getDefaultInvitedMembers(@.members)
 
+    getDefaultInvitedMembers: (currentMembers) ->
+        @.invitedMembers = currentMembers.map (member) => member.get('id')
+
+    toggleInviteMember: (member) ->
+        if @.invitedMembers.includes(member.get('id'))
+            index = @.invitedMembers.indexOf(member.get('id'))
+            @.invitedMembers = @.invitedMembers.remove(index)
+        else
+            @.invitedMembers = @.invitedMembers.push(member.get('id'))
+
+        @.onSetInvitedMembers({members: @.invitedMembers})
 
 angular.module("taigaProjects").controller("InviteMembersCtrl", InviteMembersController)
