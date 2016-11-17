@@ -52,8 +52,9 @@ class DuplicateProjectController
     onDuplicateProject: () ->
         projectId = @.referenceProject.get('id')
         data = @.duplicatedProject
+        @.loading = true
         @projectsService.duplicate(projectId, data).then (newProject) =>
-            console.log newProject
+            @.loading = false
             @location.path(@urlservice.resolve("project", {project: newProject.data.slug}))
             @currentUserService.loadProjects()
 
