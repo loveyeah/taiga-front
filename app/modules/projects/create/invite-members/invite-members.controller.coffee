@@ -18,25 +18,22 @@
 ###
 
 class InviteMembersController
-    @.$inject = [
-        "tgCurrentUserService"
-    ]
+    @.$inject = []
 
-    constructor: (@currentUserService) ->
-        @.invitedMembers = []
-        @.user = @currentUserService.getUser()
-        @.validMembers = @.members.filter (member) =>
-            member.get('id') != @.user.get('id')
-
-    getDefaultInvitedMembers: (validMembers) ->
-        @.invitedMembers = validMembers.map (member) => member.get('id')
+    constructor: () ->
+        @.invitedMembers = @.members
 
     toggleInviteMember: (member) ->
-        if @.invitedMembers.includes(member.get('id'))
-            index = @.invitedMembers.indexOf(member.get('id'))
-            @.invitedMembers = @.invitedMembers.remove(index)
+        membersList = @.invitedMembers.map (members) =>
+            members.get('id')
+
+        if membersList.includes(member.get('id'))
+            @.invitedMembers = @.invitedMembers.filter (members) =>
+                members.get('id') != member.get('id')
+            console.log @.invitedMembers.size
         else
-            @.invitedMembers = @.invitedMembers.push(member.get('id'))
+            @.invitedMembers = @.invitedMembers.push(member)
+            console.log @.invitedMembers.size
 
         @.onSetInvitedMembers({members: @.invitedMembers})
 

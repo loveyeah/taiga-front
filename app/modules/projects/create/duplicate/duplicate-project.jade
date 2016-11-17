@@ -72,8 +72,8 @@
                     span(translate="PROJECT.CREATE.PRIVATE_PROJECT")
                     
         tg-invite-members(
-            ng-if="vm.referenceProject.get('members')"
-            members="vm.referenceProject.get('members')"
+            ng-if="vm.invitedMembers"
+            members="vm.invitedMembers"
             on-set-invited-members="vm.setInvitedMembers(members)"
         )
         .create-project-action

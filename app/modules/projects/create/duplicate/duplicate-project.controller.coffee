@@ -37,13 +37,17 @@ class DuplicateProjectController
         @projectsService.getProjectBySlug(project).then (project) =>
             @.referenceProject = project
             members = project.get('members')
-            @.setInvitedMembers(members)
+            @.getInvitedMembers(members)
+
+    getInvitedMembers: (members) ->
+        @.invitedMembers = members
+        @.invitedMembers = @.invitedMembers.filter (members) =>
+            members.get('id') != @.user.get('id')
+        @.setInvitedMembers(@.invitedMembers)
 
     setInvitedMembers: (members) ->
-        invitedMembers = members.map (member) =>
-            return member.get('id')
-        @.duplicatedProject.users = invitedMembers.filter (members) =>
-            members != @.user.get('id')
+        @.duplicatedProject.users = members.map (member) =>
+            member.get('id')
 
     onDuplicateProject: () ->
         projectId = @.referenceProject.get('id')
