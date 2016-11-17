@@ -1,9 +1,9 @@
 label.create-project-invite-avatar(
     ng-class="{'disabled': vm.isUserDisabled}"
+    ng-click="vm.toggleUserInvite()"
 )
     img(
         tg-avatar="vm.avatar"
         alt="{{vm.avatar.get('full_name_display')}}"
         title="{{vm.avatar.get('full_name_display')}}"
-        ng-click="vm.toggleUserInvite()"
     )
