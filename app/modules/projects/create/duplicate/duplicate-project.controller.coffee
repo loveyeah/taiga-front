@@ -20,10 +20,12 @@
 class DuplicateProjectController
     @.$inject = [
         "tgCurrentUserService",
-        "tgProjectsService"
+        "tgProjectsService",
+        "$tgLocation",
+        "$tgNavUrls"
     ]
 
-    constructor: (@currentUserService, @projectsService) ->
+    constructor: (@currentUserService, @projectsService, @location, @urlservice) ->
         @.projects = @currentUserService.projects.get("all")
         @.canCreatePublicProjects = @currentUserService.canCreatePublicProjects()
         @.canCreatePrivateProjects = @currentUserService.canCreatePrivateProjects()
@@ -33,11 +35,13 @@ class DuplicateProjectController
             @.referenceProject = project
 
     setInvitedMembers: (members) ->
-        console.log members
         @.duplicatedProject.users = members
-        console.log @.duplicatedProject
 
     onDuplicateProject: () ->
-        console.log @.duplicatedProject
+        projectId = @.referenceProject.get('id')
+        data = @.duplicatedProject
+        @projectsService.duplicate(projectId, data).then (newProject) =>
+            @location.path($navUrls.resolve("home"))
+            # @currentUserService.loadProjects()
 
 angular.module("taigaProjects").controller("DuplicateProjectCtrl", DuplicateProjectController)

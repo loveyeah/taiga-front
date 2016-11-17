@@ -26,6 +26,9 @@ class ProjectsService extends taiga.Service
 
     constructor: (@rs, @projectUrl, @lightboxFactory) ->
 
+    duplicate: (projectId, data) ->
+        return @rs.projects.duplicate(projectId, data)
+
     getProjectBySlug: (projectSlug) ->
         return @rs.projects.getProjectBySlug(projectSlug)
             .then (project) =>
