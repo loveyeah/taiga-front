@@ -27,11 +27,9 @@ class InviteMembersController
         @.user = @currentUserService.getUser()
         @.validMembers = @.members.filter (member) =>
             member.get('id') != @.user.get('id')
-        # @.getDefaultInvitedMembers(@.validMembers)
 
     getDefaultInvitedMembers: (validMembers) ->
         @.invitedMembers = validMembers.map (member) => member.get('id')
-        console.log @.invitedMembers.toJS()
 
     toggleInviteMember: (member) ->
         if @.invitedMembers.includes(member.get('id'))
@@ -40,7 +38,6 @@ class InviteMembersController
         else
             @.invitedMembers = @.invitedMembers.push(member.get('id'))
 
-        console.log @.invitedMembers.toJS()
         @.onSetInvitedMembers({members: @.invitedMembers})
 
 angular.module("taigaProjects").controller("InviteMembersCtrl", InviteMembersController)

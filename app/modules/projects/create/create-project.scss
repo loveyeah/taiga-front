@@ -81,7 +81,16 @@ $create-project-padding: 1.25rem;
 .create-project-action {
     display: flex;
     margin-bottom: 0;
+    button {
+        @include font-size(large);
+        padding: 12px;
+    }
     .create-project-action-duplicate {
+        flex: 4;
+        margin-left: 1rem;
+    }
+    .create-project-action-cancel {
+        color: currentColor;
         flex: 1;
     }
 }

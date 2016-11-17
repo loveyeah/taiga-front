@@ -76,18 +76,18 @@
             members="vm.referenceProject.get('members')"
             on-set-invited-members="vm.setInvitedMembers(members)"
         )
-        fieldset.create-project-action
-            button.create-project-action-cancel(
+        .create-project-action
+            button.trans-button.create-project-action-cancel(
                 type="button"
                 ng-click="vm.onCancelProjectDuplication()"
                 title="{{'PROJECT.CREATE.BACK' | translate}}"
                 translate="PROJECT.CREATE.BACK"
             )
-            button.create-project-action-duplicate(
+            button.button-green.create-project-action-duplicate(
                 type="submit"
                 ng-click="vm.onDuplicateProject()"
                 title="{{'PROJECT.CREATE.TITLE' | translate}}"
-                ng-disabled="!vm.duplicatedProject.name && !vm.referenceProject || vm.loading"
+                ng-disabled="!vm.duplicatedProject.name || !vm.duplicatedProject.description || !vm.referenceProject || vm.loading"
                 tg-loading="vm.loading"
                 translate="PROJECT.CREATE.TITLE"
             )

@@ -27,15 +27,23 @@ class DuplicateProjectController
 
     constructor: (@currentUserService, @projectsService, @location, @urlservice) ->
         @.projects = @currentUserService.projects.get("all")
+        @.user = @currentUserService.getUser()
         @.canCreatePublicProjects = @currentUserService.canCreatePublicProjects()
         @.canCreatePrivateProjects = @currentUserService.canCreatePrivateProjects()
+        @.duplicatedProject = {}
+        @.duplicatedProject.is_private = false
 
     getReferenceProject: (project) ->
         @projectsService.getProjectBySlug(project).then (project) =>
             @.referenceProject = project
+            members = project.get('members')
+            @.setInvitedMembers(members)
 
     setInvitedMembers: (members) ->
-        @.duplicatedProject.users = members
+        invitedMembers = members.map (member) =>
+            return member.get('id')
+        @.duplicatedProject.users = invitedMembers.filter (members) =>
+            members != @.user.get('id')
 
     onDuplicateProject: () ->
         projectId = @.referenceProject.get('id')
