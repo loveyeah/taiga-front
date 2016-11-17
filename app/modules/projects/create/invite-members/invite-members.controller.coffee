@@ -22,6 +22,7 @@ class InviteMembersController
 
     constructor: () ->
         @.invitedMembers = @.members
+        @.displayUserWarning = false
 
     toggleInviteMember: (member) ->
         membersList = @.invitedMembers.map (members) =>
@@ -30,10 +31,12 @@ class InviteMembersController
         if membersList.includes(member.get('id'))
             @.invitedMembers = @.invitedMembers.filter (members) =>
                 members.get('id') != member.get('id')
-            console.log @.invitedMembers.size
         else
             @.invitedMembers = @.invitedMembers.push(member)
-            console.log @.invitedMembers.size
+
+        @.displayUserWarning = false
+        if @.invitedMembers.size == 0
+            @.displayUserWarning = true
 
         @.onSetInvitedMembers({members: @.invitedMembers})
 

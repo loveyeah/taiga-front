@@ -37,6 +37,10 @@
                 data-required="true"
                 required
             ) 
+        p(
+            ng-if="!vm.canCreatePrivateProjects"
+            translate="PROJECT.CREATE.MAX_PRIVATE_PROJECTS"
+        )
         .duplicate-project-privacity(role="group")
             fieldset
                 input(
