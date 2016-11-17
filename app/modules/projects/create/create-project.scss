@@ -77,3 +77,11 @@ $create-project-padding: 1.25rem;
         margin-bottom: 0;
     }
 }
+
+.create-project-action {
+    display: flex;
+    margin-bottom: 0;
+    .create-project-action-duplicate {
+        flex: 1;
+    }
+}

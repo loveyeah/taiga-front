@@ -21,7 +21,7 @@ InviteMembersDirective = () ->
 
     link = (scope, el, attr, ctrl) ->
         scope.$watch 'vm.members', (members) ->
-            ctrl.getDefaultInvitedMembers(members)
+            ctrl.getDefaultInvitedMembers(ctrl.validMembers)
 
     return {
         link: link,

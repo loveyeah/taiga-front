@@ -41,7 +41,8 @@ class DuplicateProjectController
         projectId = @.referenceProject.get('id')
         data = @.duplicatedProject
         @projectsService.duplicate(projectId, data).then (newProject) =>
-            @location.path($navUrls.resolve("home"))
-            # @currentUserService.loadProjects()
+            console.log newProject
+            @location.path(@urlservice.resolve("project", {project: newProject.data.slug}))
+            @currentUserService.loadProjects()
 
 angular.module("taigaProjects").controller("DuplicateProjectCtrl", DuplicateProjectController)
