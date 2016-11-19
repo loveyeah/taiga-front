@@ -14,4 +14,5 @@ section.duty-custom-fields(ng-show="ctrl.customAttributes.length")
             ng-repeat="attr in ctrl.customAttributes"
             tg-custom-attribute-value="ctrl.getAttributeValue(attr)"
             required-edition-perm!="<%- requiredEditionPerm %>"
+            ng-class="{'multiline': attr.type === 'multiline'}"
         )
