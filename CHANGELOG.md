@@ -5,6 +5,7 @@
 - Velocity forecasting. Create sprints according to team velocity.
 - Remove bower
 - Add new wysiwyg editor (like the Medunm editor) with emojis, local storage changes, mentions...
+- Rich text custom fields support
 
 ### Misc
 - Lots of small and not so small bugfixes.

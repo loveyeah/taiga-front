@@ -405,6 +405,7 @@ module.directive("tgColorSelection", ColorSelectionDirective)
 
 # Custom attributes types (see taiga-back/taiga/projects/custom_attributes/choices.py)
 TEXT_TYPE = "text"
+RICHTEXT_TYPE = "richtext"
 MULTILINE_TYPE = "multiline"
 DATE_TYPE = "date"
 URL_TYPE = "url"
@@ -414,6 +415,10 @@ TYPE_CHOICES = [
     {
         key: TEXT_TYPE,
         name: "ADMIN.CUSTOM_FIELDS.FIELD_TYPE_TEXT"
+    },
+    {
+        key: RICHTEXT_TYPE,
+        name: "ADMIN.CUSTOM_FIELDS.FIELD_TYPE_RICHTEXT"
     },
     {
         key: MULTILINE_TYPE,
