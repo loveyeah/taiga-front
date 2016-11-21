@@ -964,7 +964,7 @@
             "BACK": "Back",
             "MAX_PRIVATE_PROJECTS": "Unfortunately, You've reached the maximum number of private projects.\nIf you would like to increase the current limit please contact the administrator.",
             "PUBLIC_PROJECT": "Public Project",
-            "PRIVATE_PROJECT": "Private Project",
+            "PRIVATE_PROJECT": "Private Project"
         },
         "DUPLICATE": {
             "TITLE": "Duplicate Project",
