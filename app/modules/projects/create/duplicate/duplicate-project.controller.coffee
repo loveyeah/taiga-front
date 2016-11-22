@@ -55,6 +55,7 @@ class DuplicateProjectController
         @._checkUsersLimit(@.invitedMembers.size)
 
     _checkUsersLimit: (size) ->
+        console.log @.user.get('max_memberships_private_projects'), size
         if @.duplicatedProject.is_private
             @.limitMembersPublicProject = false
             @.limitMembersPrivateProject = @.user.get('max_memberships_private_projects') < size

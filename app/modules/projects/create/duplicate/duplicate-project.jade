@@ -78,20 +78,34 @@
                 label.duplicate-project-privacity-label(for="template-private")
                     tg-svg(svg-icon="icon-lock")
                     span(translate="PROJECT.CREATE.PRIVATE_PROJECT")
-        // Max users
-        //- p(
-        //-     ng-if="vm.limitMembersPublicProject"
-        //-     translate="PROJECT.CREATE.MAX_PRIVATE_PROJECTS"
-        //- )        
-        //- p(
-        //-     ng-if="vm.limitMembersPrivateProject"
-        //-     translate="PROJECT.CREATE.PRIVATE_PROJECT"
-        //- )        
+        
+        label(ng-if="vm.invitedMembers")
+            span(translate="PROJECT.CREATE.INVITE")
+            span.mumble(
+                ng-if="vm.displayUserWarning"
+                translate="PROJECT.CREATE.SOLO_PROJECT"
+            )
+            span.mumble(
+                ng-if="vm.limitMembersPublicProject || vm.limitMembersPrivateProject"
+                translate="PROJECT.CREATE.INVITE_LATER"
+            )
+        
         tg-invite-members(
             ng-if="vm.invitedMembers"
             members="vm.invitedMembers"
             on-set-invited-members="vm.setInvitedMembers(members)"
         )
+        
+        p(
+            ng-if="vm.duplicatedProject.is_private && vm.limitMembersPrivateProject"
+            translate="PROJECT.CREATE.MAX_MEMBERS"
+        )
+        
+        p(
+            ng-if="!vm.duplicatedProject.is_private && vm.limitMembersPublicProject"
+            translate="PROJECT.CREATE.MAX_MEMBERS"
+        )
+
         .create-project-action
             button.trans-button.create-project-action-cancel(
                 type="button"

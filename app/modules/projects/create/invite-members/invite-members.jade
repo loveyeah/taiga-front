@@ -1,11 +1,4 @@
 fieldset.create-project-invite
-    label
-        span(translate="PROJECT.CREATE.INVITE")
-        span.mumble(
-            ng-if="vm.displayUserWarning"
-            translate="PROJECT.CREATE.SOLO_PROJECT"
-        )
-        span.mumble(translate="PROJECT.CREATE.INVITE_LATER")
     .create-project-invite-avatars
         tg-single-member(
             tg-repeat="member in vm.members track by member.get('id')"
