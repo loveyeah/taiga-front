@@ -50,7 +50,7 @@
                         translate="PROJECT.CREATE.DUPLICATE"
                     )
                     p.create-project-selector-description(translate="PROJECT.CREATE.DUPLICATE_DESC")
-            li
+            li(ng-click="vm.getStep('import')")
                 .create-project-selector-icon
                     tg-svg(svg-icon="icon-upload")
                 .create-project-selector-template-wrapper
@@ -64,5 +64,10 @@
 
 tg-duplicate-project(
     ng-if="vm.inStepDuplicateProject"
+    on-cancel-project-duplication="vm.getStep('home')"
+)
+
+tg-import-project(
+    ng-if="vm.inStepImportProject"
     on-cancel-project-duplication="vm.getStep('home')"
 )

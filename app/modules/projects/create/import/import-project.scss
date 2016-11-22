@@ -1,0 +1,14 @@
+.import-project {
+    &-from-site {
+        background: $mass-white;
+        color: $grayer;
+        cursor: pointer;
+        display: flex;
+        margin-bottom: .5rem;
+        padding: 1.5rem;
+        &:hover {
+            background: rgba($primary, .1);
+            transition: background .3s ease-in;
+        }
+    }
+}

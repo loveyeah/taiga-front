@@ -973,6 +973,10 @@
             "DETAILS": "New project details",
             "PROJECT_TITLE": "Project Name",
             "PROJECT_DESCRIPTION": "Project Description"
+        },
+        "IMPORT": {
+            "TITLE": "Import Project",
+            "DESCRIPTION": "Fresh and clean. So exciting!"
         }
     },
     "LIGHTBOX": {

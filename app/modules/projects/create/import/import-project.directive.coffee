@@ -14,26 +14,24 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
-# File: project.controller.coffee
+# File: import-project.directive.coffee
 ###
 
-class CreateProjectController
-    @.$inject = []
+ImportProjectDirective = () ->
 
-    constructor: () ->
-        @.inDefaultStep = true
+    link = (scope, el, attr, ctrl) ->
 
-    getStep: (step) ->
-        if step == 'home'
-            @.inDefaultStep = true
-            @.inStepDuplicateProject = false
-        else if step == 'duplicate'
-            @.inDefaultStep = false
-            @.inStepDuplicateProject = true
-        else if step == 'import'
-            @.inDefaultStep = false
-            @.inStepDuplicateProject = false
-            @.inStepImportProject = true
+    return {
+        link: link,
+        templateUrl:"projects/create/import/import-project.html",
+        controller: "ImportProjectCtrl",
+        controllerAs: "vm",
+        bindToController: true,
+        scope: {
+            onCancelProjectDuplication: '&'
+        }
+    }
 
+ImportProjectDirective.$inject = []
 
-angular.module("taigaProjects").controller("CreateProjectCtrl", CreateProjectController)
+angular.module("taigaProjects").directive("tgImportProject", ImportProjectDirective)

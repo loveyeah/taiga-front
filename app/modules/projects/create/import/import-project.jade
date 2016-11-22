@@ -1,0 +1,23 @@
+.create-project.import-project
+    h1.create-project-title(translate="PROJECT.IMPORT.TITLE")
+    h3.create-project-description(translate="PROJECT.IMPORT.DESCRIPTION")
+
+    ul.import-project-from
+        li
+            .import-project-from-site(ng-click="vm.select('taiga')") Taiga
+            form.import-project-site-data(ng-if="vm.from === 'taiga'")
+                label(for="url")
+                input(
+                    type="text"
+                    placeholder="{{'PROJECT.DUPLICATE.PROJECT_TITLE' | translate}}"
+                    name="url"
+                    data-required="true"
+                    required
+                )
+
+        li
+            .import-project-from-site(ng-click="vm.select('trello')") Trello
+        li
+            .import-project-from-site(ng-click="vm.select('jira')") Jira
+        li
+            .import-project-from-site(ng-click="vm.select('github')") Github
