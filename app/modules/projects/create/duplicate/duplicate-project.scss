@@ -12,6 +12,10 @@
             margin-left: .25rem;
         }
     }
+    &-limit {
+        @include font-type(light);
+        @include font-size(small);
+    }
     &-reference {
         margin-bottom: 2rem;
     }

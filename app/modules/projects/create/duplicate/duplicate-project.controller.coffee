@@ -31,15 +31,19 @@ class DuplicateProjectController
         @.canCreatePublicProjects = @currentUserService.canCreatePublicProjects()
         @.canCreatePrivateProjects = @currentUserService.canCreatePrivateProjects()
         @.duplicatedProject = {}
-        @.duplicatedProject.is_private = false
+
+        if @.canCreatePublicProjects.valid
+            @.duplicatedProject.is_private = false
+        else
+            @.duplicatedProject.is_private = true
 
     getReferenceProject: (project) ->
         @projectsService.getProjectBySlug(project).then (project) =>
             @.referenceProject = project
             members = project.get('members')
-            @.getInvitedMembers(members)
+            @._getInvitedMembers(members)
 
-    getInvitedMembers: (members) ->
+    _getInvitedMembers: (members) ->
         @.invitedMembers = members
         @.invitedMembers = @.invitedMembers.filter (members) =>
             members.get('id') != @.user.get('id')
@@ -48,6 +52,15 @@ class DuplicateProjectController
     setInvitedMembers: (members) ->
         @.duplicatedProject.users = members.map (member) =>
             member.get('id')
+        @._checkUsersLimit(@.invitedMembers.size)
+
+    _checkUsersLimit: (size) ->
+        if @.duplicatedProject.is_private
+            @.limitMembersPublicProject = false
+            @.limitMembersPrivateProject = @.user.get('max_memberships_private_projects') < size
+        else
+            @.limitMembersPrivateProject = false
+            @.limitMembersPublicProject = @.user.get('max_memberships_public_projects') < size
 
     onDuplicateProject: () ->
         projectId = @.referenceProject.get('id')

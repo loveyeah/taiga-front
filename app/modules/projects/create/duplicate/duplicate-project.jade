@@ -37,9 +37,13 @@
                 data-required="true"
                 required
             ) 
-        p(
-            ng-if="!vm.canCreatePrivateProjects"
+        p.duplicate-project-limit(
+            ng-if="!vm.canCreatePrivateProjects.valid"
             translate="PROJECT.CREATE.MAX_PRIVATE_PROJECTS"
+        )
+        p.duplicate-project-limit(
+            ng-if="!vm.canCreatePublicProjects.valid"
+            translate="PROJECT.CREATE.MAX_PUBLIC_PROJECTS"
         )
         .duplicate-project-privacity(role="group")
             fieldset
@@ -52,8 +56,8 @@
                     ng-value="false"
                     ng-model="vm.duplicatedProject.is_private"
                     required
-                    ng-disabled="!vm.canCreatePublicProjects"
-                    ng-checked="vm.canCreatePublicProjects"
+                    ng-disabled="!vm.canCreatePublicProjects.valid"
+                    ng-checked="vm.canCreatePublicProjects.valid"
                 )
                 label.duplicate-project-privacity-label(for="template-public")
                     tg-svg(svg-icon="icon-discover")
@@ -68,13 +72,21 @@
                     ng-model="vm.duplicatedProject.is_private"
                     aria-hidden="true"
                     required
-                    ng-disabled="!vm.canCreatePrivateProjects"
-                    ng-checked="!vm.canCreatePublicProjects"
+                    ng-disabled="!vm.canCreatePrivateProjects.valid"
+                    ng-checked="vm.canCreatePrivateProjects.valid"
                 )
                 label.duplicate-project-privacity-label(for="template-private")
                     tg-svg(svg-icon="icon-lock")
                     span(translate="PROJECT.CREATE.PRIVATE_PROJECT")
-                    
+        // Max users
+        //- p(
+        //-     ng-if="vm.limitMembersPublicProject"
+        //-     translate="PROJECT.CREATE.MAX_PRIVATE_PROJECTS"
+        //- )        
+        //- p(
+        //-     ng-if="vm.limitMembersPrivateProject"
+        //-     translate="PROJECT.CREATE.PRIVATE_PROJECT"
+        //- )        
         tg-invite-members(
             ng-if="vm.invitedMembers"
             members="vm.invitedMembers"
