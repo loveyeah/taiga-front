@@ -34,5 +34,11 @@
             background: darken($mass-white, 10%);
             @include font-type(bold);
         }
+        &:disabled+label {
+            color: $whitish;
+            .icon {
+                fill: $whitish;
+            }
+        }
     }
 }

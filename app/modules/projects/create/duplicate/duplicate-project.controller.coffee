@@ -32,11 +32,6 @@ class DuplicateProjectController
         @.canCreatePrivateProjects = @currentUserService.canCreatePrivateProjects()
         @.duplicatedProject = {}
 
-        if @.canCreatePublicProjects.valid
-            @.duplicatedProject.is_private = false
-        else
-            @.duplicatedProject.is_private = true
-
     getReferenceProject: (project) ->
         @projectsService.getProjectBySlug(project).then (project) =>
             @.referenceProject = project

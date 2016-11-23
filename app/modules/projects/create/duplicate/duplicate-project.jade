@@ -45,6 +45,7 @@
             ng-if="!vm.canCreatePublicProjects.valid"
             translate="PROJECT.CREATE.MAX_PUBLIC_PROJECTS"
         )
+        
         .duplicate-project-privacity(role="group")
             fieldset
                 input(
@@ -57,7 +58,7 @@
                     ng-model="vm.duplicatedProject.is_private"
                     required
                     ng-disabled="!vm.canCreatePublicProjects.valid"
-                    ng-checked="vm.canCreatePublicProjects.valid"
+                    ng-checked="!vm.referenceProject.get('is_private')"
                 )
                 label.duplicate-project-privacity-label(for="template-public")
                     tg-svg(svg-icon="icon-discover")
@@ -73,7 +74,7 @@
                     aria-hidden="true"
                     required
                     ng-disabled="!vm.canCreatePrivateProjects.valid"
-                    ng-checked="vm.canCreatePrivateProjects.valid"
+                    ng-checked="!vm.referenceProject.get('is_private')"
                 )
                 label.duplicate-project-privacity-label(for="template-private")
                     tg-svg(svg-icon="icon-lock")
@@ -117,7 +118,7 @@
                 type="submit"
                 ng-click="vm.onDuplicateProject()"
                 title="{{'PROJECT.CREATE.TITLE' | translate}}"
-                ng-disabled="!vm.duplicatedProject.name || !vm.duplicatedProject.description || !vm.referenceProject || vm.loading"
+                ng-disabled="!vm.duplicatedProject.name || !vm.duplicatedProject.description || !vm.referenceProject || !vm.duplicatedProject.is_private || vm.loading"
                 tg-loading="vm.loading"
                 translate="PROJECT.CREATE.TITLE"
             )
