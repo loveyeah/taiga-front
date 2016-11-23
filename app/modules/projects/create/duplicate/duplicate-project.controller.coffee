@@ -28,7 +28,6 @@ class DuplicateProjectController
     constructor: (@currentUserService, @projectsService, @location, @urlservice) ->
         @.projects = @currentUserService.projects.get("all")
         @.user = @currentUserService.getUser()
-        console.log @.user.toJS()
         @.canCreatePublicProjects = @currentUserService.canCreatePublicProjects()
         @.canCreatePrivateProjects = @currentUserService.canCreatePrivateProjects()
         @.duplicatedProject = {}
@@ -36,28 +35,35 @@ class DuplicateProjectController
     getReferenceProject: (project) ->
         @projectsService.getProjectBySlug(project).then (project) =>
             @.referenceProject = project
-            members = project.get('members')
-            @._getInvitedMembers(members)
+            @.invitedMembers = project.get('members')
+            @._getInvitedMembers(@.invitedMembers)
 
     _getInvitedMembers: (members) ->
         @.invitedMembers = members
         @.invitedMembers = @.invitedMembers.filter (members) =>
             members.get('id') != @.user.get('id')
         @.setInvitedMembers(@.invitedMembers)
+        @.checkUsersLimit(@.invitedMembers)
 
     setInvitedMembers: (members) ->
         @.duplicatedProject.users = members.map (member) =>
             member.get('id')
-        @._checkUsersLimit(@.invitedMembers.size)
+        @.checkUsersLimit(members)
 
-    _checkUsersLimit: (size) ->
-        console.log @.user.get('max_memberships_private_projects'), size
+    checkUsersLimit: (members) ->
+        size = members.size
         if @.duplicatedProject.is_private
             @.limitMembersPublicProject = false
             @.limitMembersPrivateProject = @.user.get('max_memberships_private_projects') < size
+            console.log 'private'
+            console.log @.user.toJS()
+            console.log @.user.get('max_memberships_private_projects'), size
         else
             @.limitMembersPrivateProject = false
             @.limitMembersPublicProject = @.user.get('max_memberships_public_projects') < size
+            console.log 'public'
+            console.log @.user.toJS()
+            console.log @.user.get('max_memberships_public_projects'), size
 
     onDuplicateProject: () ->
         projectId = @.referenceProject.get('id')

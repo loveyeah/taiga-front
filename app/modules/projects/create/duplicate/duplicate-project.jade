@@ -59,6 +59,7 @@
                     required
                     ng-disabled="!vm.canCreatePublicProjects.valid"
                     ng-checked="!vm.referenceProject.get('is_private')"
+                    ng-change="vm.checkUsersLimit(vm.duplicatedProject.users)"
                 )
                 label.duplicate-project-privacity-label(for="template-public")
                     tg-svg(svg-icon="icon-discover")
@@ -75,6 +76,7 @@
                     required
                     ng-disabled="!vm.canCreatePrivateProjects.valid"
                     ng-checked="vm.referenceProject.get('is_private')"
+                    ng-change="vm.checkUsersLimit(vm.duplicatedProject.users)"
                 )
                 label.duplicate-project-privacity-label(for="template-private")
                     tg-svg(svg-icon="icon-lock")
@@ -86,10 +88,7 @@
                 ng-if="vm.displayUserWarning"
                 translate="PROJECT.CREATE.SOLO_PROJECT"
             )
-            span.mumble(
-                ng-if="vm.limitMembersPublicProject || vm.limitMembersPrivateProject"
-                translate="PROJECT.CREATE.INVITE_LATER"
-            )
+            span.mumble(translate="PROJECT.CREATE.INVITE_LATER")
         
         tg-invite-members(
             ng-if="vm.invitedMembers"
@@ -97,12 +96,11 @@
             on-set-invited-members="vm.setInvitedMembers(members)"
         )
         
-        p(
+        p.duplicate-project-limit(
             ng-if="vm.duplicatedProject.is_private && vm.limitMembersPrivateProject"
             translate="PROJECT.CREATE.MAX_MEMBERS"
         )
-        
-        p(
+        p.duplicate-project-limit(
             ng-if="!vm.duplicatedProject.is_private && vm.limitMembersPublicProject"
             translate="PROJECT.CREATE.MAX_MEMBERS"
         )
@@ -118,7 +116,7 @@
                 type="submit"
                 ng-click="vm.onDuplicateProject()"
                 title="{{'PROJECT.CREATE.TITLE' | translate}}"
-                ng-disabled="!vm.duplicatedProject.name || !vm.duplicatedProject.description || !vm.referenceProject || !vm.duplicatedProject.is_private || vm.loading"
+                ng-disabled="!vm.duplicatedProject.name || !vm.duplicatedProject.description || !vm.referenceProject || vm.loading || vm.limitMembersPrivateProject || vm.limitMembersPublicProject"
                 tg-loading="vm.loading"
                 translate="PROJECT.CREATE.TITLE"
             )
