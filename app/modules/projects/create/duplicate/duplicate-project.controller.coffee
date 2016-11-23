@@ -28,6 +28,7 @@ class DuplicateProjectController
     constructor: (@currentUserService, @projectsService, @location, @urlservice) ->
         @.projects = @currentUserService.projects.get("all")
         @.user = @currentUserService.getUser()
+        console.log @.user.toJS()
         @.canCreatePublicProjects = @currentUserService.canCreatePublicProjects()
         @.canCreatePrivateProjects = @currentUserService.canCreatePrivateProjects()
         @.duplicatedProject = {}

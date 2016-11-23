@@ -74,7 +74,7 @@
                     aria-hidden="true"
                     required
                     ng-disabled="!vm.canCreatePrivateProjects.valid"
-                    ng-checked="!vm.referenceProject.get('is_private')"
+                    ng-checked="vm.referenceProject.get('is_private')"
                 )
                 label.duplicate-project-privacity-label(for="template-private")
                     tg-svg(svg-icon="icon-lock")
